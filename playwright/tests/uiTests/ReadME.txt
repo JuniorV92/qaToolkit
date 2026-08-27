@@ -1,0 +1,1 @@
+The test included in the uiTest folder will be using the www.uitestingplayground.com/ as base URL for all the tests.
