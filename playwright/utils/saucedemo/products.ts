@@ -31,7 +31,7 @@ export const ALL_PRODUCTS = [
         image: "/sauce-labs-onesie.jpg"
     },
     {
-        name: "test.allTheThings() T-Shirt (Red)",
+        name: "Test.allTheThings() T-Shirt (Red)",
         price: 15.99,
         description: "This classic Sauce Labs T-Shirt is perfect for any occasion. Made from 100% cotton, it's comfortable, durable, and stylish.",
         image: "/test.allTheThings() t-shirt (red).jpg"

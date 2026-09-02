@@ -11,7 +11,7 @@ export const SORT_DROPDOWN = ".product_sort_container";
 
 // Get item card by name
 export async function getItem(page: Page, name: string) {
-    return page.locator(INVENTORY_ITEM).filter({ hasText: name });
+    return page.locator(INVENTORY_ITEM).filter({ hasText: new RegExp(name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i') });
 }
 
 // Get all items
@@ -43,8 +43,8 @@ export async function getItemButton(page: Page, name: string) {
     return page.locator(INVENTORY_ITEM).filter({ hasText: name }).locator("button");
 }
 
-// Validate item card elements are visible
-export async function validateItemCard(page: Page, name: string) {
+// Validate item card UI
+export async function validateItemCardUI(page: Page, name: string) {
     expect(await getItem(page, name)).toBeVisible();
     let price = await getItemPrice(page, name);
     let description = await getItemDescription(page, name);
@@ -56,8 +56,8 @@ export async function validateItemCard(page: Page, name: string) {
 
     expect(await price).toBeGreaterThan(0);
     expect(await description).not.toEqual("");
-    expect(await image).toHaveAttribute("alt", name);
-    expect(await button).toHaveText("Add to cart");
+    await expect(image).toHaveAttribute("alt", name);
+    await expect(button).toHaveText("Add to cart");
 }
 
 // Validate main elements of page are visible

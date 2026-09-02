@@ -13,7 +13,7 @@ test("Verify inventory page UI", async ({ page }) => {
     expect(await items.count()).toBeGreaterThan(0);
     expect(await page.locator(inventoryPage.SORT_DROPDOWN)).toBeVisible();
     // Asserting item "Sauce Labs Backpack"
-    await inventoryPage.validateItemCard(page, "Sauce Labs Backpack");
+    await inventoryPage.validateItemCardUI(page, "Sauce Labs Backpack");
     await page.close();
 });
 
@@ -23,5 +23,13 @@ test.skip("dummy test for products object", async ({ page }) => {
     expect(prod1.price).toEqual(29.99);
     expect(prod1.description).toEqual("carry.allTheThings() with the sleek, red Sauce Labs Backpack. Includes a laptop sleeve.");
     expect(prod1.image).toEqual("/sauce-labs-backpack.jpg");
+    await page.close();
+});
+
+test("Validate each card UI", async ({ page }) => {
+    await logIn.login(page, process.env.STANDAR_USER!, process.env.PASSWORD!);
+    for (let i = 0; i < products.ALL_PRODUCTS.length; i++) {
+        await inventoryPage.validateItemCardUI(page, products.ALL_PRODUCTS[i].name);
+    }
     await page.close();
 });
