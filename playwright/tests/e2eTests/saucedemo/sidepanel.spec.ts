@@ -89,7 +89,7 @@ test.describe("Verify Side panel Links", () => {
         });
 
         await test.step("Verify results", async () => {
-            expect(await page).toHaveURL("https://www.saucedemo.com/");
+            await expect(await page).toHaveURL("https://www.saucedemo.com/");
         });
     });
 

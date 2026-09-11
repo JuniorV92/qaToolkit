@@ -23,7 +23,7 @@ test('File Upload link', async ({ page }) => {
 
   // Used file
   const fileName = 'ReadME.txt';
-  const filePath = path.join('playwright/tests/uiTests/', fileName);
+  const filePath = path.resolve(__dirname, fileName);
 
   await test.step('Upload file by drag and drop', async step => {
     if (iframe) {

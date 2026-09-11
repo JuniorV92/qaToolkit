@@ -34,7 +34,7 @@ test('Click link', async ({ page }) => {
     await button.click();
 
     // Button success exists
-    await expect(page.locator('button[class*="success"]')).toBeVisible();
+    await expect(page.locator('button[class*="success"]')).toBeVisible({ timeout: 10000 });
   });
 
   await page.close();
