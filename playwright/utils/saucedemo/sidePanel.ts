@@ -5,6 +5,7 @@ export const SIDE_PANEL_CLOSE = "#react-burger-cross-btn";
 export const SIDE_PANEL = ".bm-menu";
 export const SIDE_PANEL_OPTIONS = [
     "All Items",
+    "Dynamic Catalog",
     "About",
     "Logout",
     "Reset App State"
@@ -24,7 +25,7 @@ export async function closeSidePanel(page: Page) {
 
 // Click sidepanel option
 export async function clickSidePanelOption(page: Page, option: string) {
-    await page.locator(`a[@id='inventory_sidebar_link']`, { hasText: option }).click();
+    await page.locator(`a[id*='sidebar_link']`, { hasText: option }).click();
 }
 
 // Is sidepanel open

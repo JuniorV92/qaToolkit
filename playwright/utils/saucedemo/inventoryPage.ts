@@ -4,6 +4,7 @@ export const SAUCEDEMO_INVENTORY_PAGE_URL = "https://www.saucedemo.com/inventory
 export const TITLE = ".title";
 export const LOGO = ".app_logo";
 export const SHOPPING_CART = ".shopping_cart_link";
+export const CART_BADGE = ".shopping_cart_badge";
 export const BURGER_MENU = "#react-burger-menu-btn";
 export const INVENTORY_CONTAINER = ".inventory_container";
 export const INVENTORY_ITEM = ".inventory_item";
@@ -78,9 +79,16 @@ export async function validateItemCardUI(page: Page, name: string) {
 
 // Validate main elements of page are visible
 export async function validatePageUI(page: Page) {
-    expect(await page.locator(TITLE)).toHaveText("Products");
-    expect(await page.locator(LOGO)).toBeVisible();
-    expect(await page.locator(SHOPPING_CART)).toBeVisible();
-    expect(await page.locator(BURGER_MENU)).toBeVisible();
-    expect(await page.locator(INVENTORY_CONTAINER)).toBeVisible();
+    await expect(page.locator(TITLE)).toHaveText("Products");
+    await expect(page.locator(LOGO)).toBeVisible();
+    await expect(page.locator(SHOPPING_CART)).toBeVisible();
+    await expect(page.locator(BURGER_MENU)).toBeVisible();
+    await expect(page.locator(INVENTORY_CONTAINER)).toBeVisible();
+}
+
+// Open cart
+export async function openCart(page: Page) {
+    await page.click(SHOPPING_CART);
+    await page.waitForURL("**/cart.html");
+    await page.waitForLoadState("networkidle");
 }
