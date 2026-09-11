@@ -17,7 +17,7 @@ test("Verify inventory page UI", async ({ page }) => {
     await page.close();
 });
 
-test.skip("dummy test for products object", async ({ page }) => {
+test.fixme("dummy test for products object", async ({ page }) => {
     let prod1 = products.ALL_PRODUCTS[0];
     expect(prod1.name).toEqual("Sauce Labs Backpack");
     expect(prod1.price).toEqual(29.99);
@@ -32,4 +32,50 @@ test("Validate each card UI", async ({ page }) => {
         await inventoryPage.validateItemCardUI(page, products.ALL_PRODUCTS[i].name);
     }
     await page.close();
+});
+
+test("Filter by...", async ({ page }) => {
+    await test.beforeAll(async () => {
+        await logIn.login(page, process.env.STANDAR_USER!, process.env.PASSWORD!);
+        await page.waitForLoadState("networkidle");
+    });
+
+    const isAscending = (arr: number[]) => arr.every((val, i) => i === 0 || arr[i - 1] <= val);
+    let originalNames: string[] = [];
+    originalNames = await inventoryPage.getAllItemsNames(page);
+
+    await test.step("Validating original state of names", async () => {
+        expect(originalNames).toEqual([...originalNames].sort());
+    });
+
+    await test.step("Sorting by name (Z to A)", async () => {
+        await page.selectOption(inventoryPage.SORT_DROPDOWN, "Name (Z to A)");
+    });
+
+    await test.step("Validating Z to A sorted state of names", async () => {
+        const names = await inventoryPage.getAllItemsNames(page);
+        expect(names).toEqual([...originalNames].reverse());
+    });
+
+    await test.step("Sorting by price (low to high)", async () => {
+        await page.selectOption(inventoryPage.SORT_DROPDOWN, "Price (low to high)");
+    });
+
+    await test.step("Validating prices low to high", async () => {
+        const prices = await inventoryPage.getAllItemsPrices(page);
+        expect(isAscending(prices)).toBe(true);
+    });
+
+    await test.step("Sorting by price (high to low)", async () => {
+        await page.selectOption(inventoryPage.SORT_DROPDOWN, "Price (high to low)");
+    });
+
+    await test.step("Validating prices high to low", async () => {
+        const prices = await inventoryPage.getAllItemsPrices(page);
+        expect(isAscending(prices.reverse())).toBe(true);
+    });
+
+    await test.afterAll(async () => {
+        await page.close();
+    });
 });

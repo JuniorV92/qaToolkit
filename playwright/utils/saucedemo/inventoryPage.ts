@@ -8,6 +8,7 @@ export const BURGER_MENU = "#react-burger-menu-btn";
 export const INVENTORY_CONTAINER = ".inventory_container";
 export const INVENTORY_ITEM = ".inventory_item";
 export const SORT_DROPDOWN = ".product_sort_container";
+export const SIDE_PANEL_BUTTON = "#react-burger-menu-btn";
 
 // Get item card by name
 export async function getItem(page: Page, name: string) {
@@ -17,6 +18,21 @@ export async function getItem(page: Page, name: string) {
 // Get all items
 export async function getAllItems(page: Page) {
     return page.locator(INVENTORY_ITEM);
+}
+
+// Get all items names
+export async function getAllItemsNames(page: Page): Promise<string[]> {
+    return page.$$eval(".inventory_item_name", elements => elements.map(el => el.textContent?.trim() || ""));
+}
+
+// Get all items prices
+export async function getAllItemsPrices(page: Page): Promise<number[]> {
+    let values = await page.$$eval(".inventory_item_price", elements => elements.map(el => el.textContent?.trim() || ""));
+    // Removing special characters from prices
+    let cleanedValues = values.map(value => value.replace("$", ""));
+    // Convert to numbers
+    let numberValues = cleanedValues.map(value => parseFloat(value));
+    return numberValues;
 }
 
 // Get item price
