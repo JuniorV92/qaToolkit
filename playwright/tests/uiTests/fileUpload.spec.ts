@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import path from 'path';
 
-test('File Upload link', async ({ page }) => {
+test('File Upload link', async ({ page, browserName }) => {
   await test.step('Navigate to URL', async step => {
     await page.goto('http://uitestingplayground.com/');
 
@@ -51,6 +51,7 @@ test('File Upload link', async ({ page }) => {
 
   // Using the `Browse files`button instead of setting the file to the input
   await test.step('Upload file by Browse files button', async step => {
+    test.skip(browserName === 'webkit', 'WebKit on Linux CI blocks file input events inside HTTP iframe');
     const browseButton = await iframe.locator('.browse-btn');
     await expect(browseButton).toBeEnabled();
     await browseButton.click();
@@ -66,6 +67,7 @@ test('File Upload link', async ({ page }) => {
   });
 
   await test.step('Removing file', async step => {
+    test.skip(browserName === 'webkit', 'WebKit on Linux CI blocks file input events inside HTTP iframe');
     // Finding remove X button
     const removeButton = await iframe.locator('div.file-actions svg');
     await removeButton.click();

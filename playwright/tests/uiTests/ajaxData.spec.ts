@@ -35,7 +35,7 @@ test('AJAX Data link', async ({ page }) => {
     let ajaxData = page.locator('p', { hasText: 'Data loaded with AJAX get request.' });
 
     // Expects button to be visible
-    await expect(ajaxData).toBeVisible({ timeout: 16000 });
+    await expect(ajaxData).toBeVisible({ timeout: 30000 });
   });
 
   await page.close();

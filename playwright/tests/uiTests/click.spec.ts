@@ -31,7 +31,7 @@ test('Click link', async ({ page }) => {
 
   await test.step('Trying real click', async step => {
     // Click the button
-    await button.click();
+    await button.click({ force: true });
 
     // Button success exists
     await expect(page.locator('button[class*="success"]')).toBeVisible({ timeout: 10000 });

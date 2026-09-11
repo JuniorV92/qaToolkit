@@ -28,7 +28,7 @@ test('Hidden Layers link', async ({ page, browser }) => {
 
     // Assert second click fails due to the overlay layer covering the button
     await page.waitForTimeout(1000);
-    await expect(greenButton.click({ trial: true, timeout: 2000 })).rejects.toThrow();
+    await expect(greenButton.click({ timeout: 2000 })).rejects.toThrow();
   });
 
   await test.step('Click blue button', async step => {
