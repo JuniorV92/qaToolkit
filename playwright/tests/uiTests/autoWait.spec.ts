@@ -46,7 +46,7 @@ test('Auto Wait link', async ({ page }) => {
     for (let time of appliedTime) {
 
       let testStep = `Validate ${target} with ${time} seconds delay`;
-      console.log(testStep);
+      // console.log(testStep);
       await page.locator(`#applyButton${time}`).click();
 
       await test.step(testStep, async step => {

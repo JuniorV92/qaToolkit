@@ -45,25 +45,25 @@ test('Visibility link', async ({ page }) => {
 
   await test.step('After hide check up', async step => {
     //Opacity 0
-    expect.soft(page.locator('#transparentButton')).toHaveCSS('opacity', '0');
+    await expect.soft(page.locator('#transparentButton')).toHaveCSS('opacity', '0');
 
     //Removed
-    expect.soft(page.locator('.btn-danger')).not.toBeVisible();
+    await expect.soft(page.locator('.btn-danger')).not.toBeVisible();
 
     // Zero Width
-    expect.soft(page.locator('.btn-warning')).toHaveCSS('width', '0px');
+    await expect.soft(page.locator('.btn-warning')).toHaveCSS('width', '0px');
 
     //Overlapped
-    expect.soft(page.locator('#overlappedButton')).toBeVisible();
+    await expect.soft(page.locator('#overlappedButton')).toBeVisible();
 
     //Visibility Hidden
-    expect.soft(page.locator('#invisibleButton')).toBeHidden();
+    await expect.soft(page.locator('#invisibleButton')).toBeHidden();
 
     //Display None
-    expect.soft(page.locator('#notdisplayedButton')).toBeHidden();
+    await expect.soft(page.locator('#notdisplayedButton')).toBeHidden();
 
     //Offscreen
-    expect.soft(page.locator('#offscreenButton')).toHaveCSS('position', 'absolute');
+    await expect.soft(page.locator('#offscreenButton')).toHaveCSS('position', 'absolute');
   });
 
   await page.close();

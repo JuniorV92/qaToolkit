@@ -33,11 +33,11 @@ test.describe("Verify Side panel UI", () => {
     test("Side panel menus", async ({ page }) => {
         await sidePanel.openSidePanel(page);
         let options: string[] = await page.locator(sidePanel.SIDE_PANEL).locator("a").allTextContents();
-        expect(await options.length).toBe(4);
+        expect(await options.length).toBe(5);
         expect(await options).toEqual(sidePanel.SIDE_PANEL_OPTIONS);
     })
 
-    test.afterAll(async ({ page }) => {
+    test.afterEach(async ({ page }) => {
         await page.close();
     });
 });
@@ -46,7 +46,6 @@ test.describe("Verify Side panel Links", () => {
     test.beforeEach(async ({ page }) => {
         await logIn.login(page, process.env.STANDAR_USER!, process.env.PASSWORD!);
         await page.waitForLoadState("networkidle");
-        await console.log('After login URL:', page.url());
         await expect(await page, "Incorrect URL for inventory page").toHaveURL(inventoryPage.SAUCEDEMO_INVENTORY_PAGE_URL);
         await expect(await page.locator(inventoryPage.TITLE)).toHaveText("Products");
         await sidePanel.openSidePanel(page);
@@ -79,7 +78,7 @@ test.describe("Verify Side panel Links", () => {
         });
 
         await test.step("Verify results", async () => {
-            expect(await page).toHaveURL("https://saucelabs.com/");
+            await expect(await page).toHaveURL("https://saucelabs.com/");
         });
     });
 
@@ -94,7 +93,7 @@ test.describe("Verify Side panel Links", () => {
         });
     });
 
-    test.afterAll(async ({ page }) => {
+    test.afterEach(async ({ page }) => {
         await page.close();
     });
 });

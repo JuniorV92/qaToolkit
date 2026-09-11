@@ -55,8 +55,8 @@ test('Sample App link', async ({ page }) => {
   });
 
   await test.step('Invalid Login Verification', async step => {
-    expect(welcomeMessage).toBeVisible();
-    expect(welcomeMessage).toHaveText('Invalid username/password');
+    await expect(welcomeMessage).toBeVisible();
+    await expect(welcomeMessage).toHaveText('Invalid username/password');
   });
 
   await page.close();

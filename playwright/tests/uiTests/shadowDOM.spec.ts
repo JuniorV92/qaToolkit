@@ -70,10 +70,10 @@ test('Shadow DOM link', async ({ page }) => {
     // The key assertion: clipboard should match the input value
     expect(clipboardText).toBe(inputValue);
 
-    await console.log(`Clipboard: ${clipboardText}`);
-    await console.log(`Input Value: ${inputValue}`);
+    // await console.log(`Clipboard: ${clipboardText}`);
+    // await console.log(`Input Value: ${inputValue}`);
 
-    await console.log(`✅ Copy function works! Copied: ${clipboardText}`);
+    // await console.log(`✅ Copy function works! Copied: ${clipboardText}`);
   });
 
   await page.close();

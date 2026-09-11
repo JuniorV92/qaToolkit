@@ -37,8 +37,8 @@ test('Progress Bar link', async ({ page }) => {
     await stopButton.click();
 
     let result = await page.locator('#result').textContent();
-    expect(result).not.toContain("n/a");
-    expect(result).toContain("Result: 0, duration:");
+    await expect.soft(result).not.toContain("n/a");
+    await expect.soft(result).toContain("Result: 0, duration:");
   });
 
   await page.close();

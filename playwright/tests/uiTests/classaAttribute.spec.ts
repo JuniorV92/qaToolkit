@@ -27,7 +27,7 @@ test('Class Attribute', async ({ page }) => {
     page.once('dialog', async dialog => {
       expect(dialog.type()).toBe('alert');
       expect(dialog.message()).toBe('Primary button pressed');
-      console.log("Dialog message: " + dialog.message());
+      // console.log("Dialog message: " + dialog.message());
       await dialog.accept();
     });
 

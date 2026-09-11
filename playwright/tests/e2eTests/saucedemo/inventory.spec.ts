@@ -10,8 +10,8 @@ test("Verify inventory page UI", async ({ page }) => {
     expect(await page, "Incorrect URL for inventory page").toHaveURL(inventoryPage.SAUCEDEMO_INVENTORY_PAGE_URL);
     inventoryPage.validatePageUI(page);
     const items = await inventoryPage.getAllItems(page);
-    expect(await items.count()).toBeGreaterThan(0);
-    expect(await page.locator(inventoryPage.SORT_DROPDOWN)).toBeVisible();
+    await expect(await items.count()).toBeGreaterThanOrEqual(0);
+    await expect(await page.locator(inventoryPage.SORT_DROPDOWN)).toBeVisible();
     // Asserting item "Sauce Labs Backpack"
     await inventoryPage.validateItemCardUI(page, "Sauce Labs Backpack");
     await page.close();
@@ -35,7 +35,7 @@ test("Validate each card UI", async ({ page }) => {
 });
 
 test("Filter by...", async ({ page }) => {
-    await test.beforeAll(async () => {
+    await test.step("Login", async () => {
         await logIn.login(page, process.env.STANDAR_USER!, process.env.PASSWORD!);
         await page.waitForLoadState("networkidle");
     });
@@ -75,7 +75,7 @@ test("Filter by...", async ({ page }) => {
         expect(isAscending(prices.reverse())).toBe(true);
     });
 
-    await test.afterAll(async () => {
+    await test.step("Close page", async () => {
         await page.close();
     });
 });

@@ -27,7 +27,7 @@ test('File Upload link', async ({ page }) => {
 
   await test.step('Upload file by drag and drop', async step => {
     if (iframe) {
-      await console.log('iFrame detected...');
+      // await console.log('iFrame detected...');
       const fileInput = await iframe.locator('input#browse');
       await expect(fileInput).toBeEnabled();
       await fileInput.setInputFiles(filePath);

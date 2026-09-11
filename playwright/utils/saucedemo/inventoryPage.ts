@@ -68,17 +68,18 @@ export async function validateItemCardUI(page: Page, name: string) {
     let image = await getItemImage(page, name);
     let button = await getItemButton(page, name);
 
-    expect(await image).toBeVisible();
-    expect(await button).toBeVisible();
+    await expect(await image).toBeVisible();
+    await expect(await button).toBeVisible();
 
-    expect(await price).toBeGreaterThan(0);
-    expect(await description).not.toEqual("");
+    await expect(await price).toBeGreaterThan(0);
+    await expect(await description).not.toEqual("");
     await expect(image).toHaveAttribute("alt", name);
     await expect(button).toHaveText("Add to cart");
 }
 
 // Validate main elements of page are visible
 export async function validatePageUI(page: Page) {
+    // await page.waitForTimeout(1000);
     await expect(page.locator(TITLE)).toHaveText("Products");
     await expect(page.locator(LOGO)).toBeVisible();
     await expect(page.locator(SHOPPING_CART)).toBeVisible();

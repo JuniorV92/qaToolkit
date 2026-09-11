@@ -28,7 +28,7 @@ test('Geo Location link', async ({ page }) => {
     page.once('dialog', async dialog => {
       expect(dialog.type()).toBe('confirm');
       expect(dialog.message()).toBe('Today is a working day.\nOr less likely a holiday.');
-      console.log("Dialog message: " + dialog.message());
+      // console.log("Dialog message: " + dialog.message());
       await dialog.accept();
     });
 

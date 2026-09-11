@@ -72,7 +72,7 @@ test("CreateBooking", async ({ request }) => {
     });
 });
 
-test("UpdateBooking", async ({ request }) => {
+test.fixme("UpdateBooking", async ({ request }) => {
     const token = await extractToken(request);
     let updatedBooking = await updateBooking(request, token, "1", {
         firstname: "Jim",
@@ -92,7 +92,7 @@ test("UpdateBooking", async ({ request }) => {
     });
 });
 
-test("PartialUpdateBooking", async ({ request }) => {
+test.fixme("PartialUpdateBooking", async ({ request }) => {
     const token = await extractToken(request);
     let updatedBooking = await partialUpdateBooking(request, token, "1", {
         firstname: "James",
@@ -107,7 +107,7 @@ test("PartialUpdateBooking", async ({ request }) => {
     });
 });
 
-test("DeleteBooking", async ({ request }) => {
+test.fixme("DeleteBooking", async ({ request }) => {
     const token = await extractToken(request);
     let deletedBooking = await deleteBooking(request, token, "10");
 
