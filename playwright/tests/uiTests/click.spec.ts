@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-test('Click link', async ({ page }) => {
+test('Click link', async ({ page, browserName }) => {
+  test.skip(browserName === 'webkit', 'WebKit on Linux CI does not dispatch physical mouse click sequences for badButton');
   await test.step('Navigate to URL', async step => {
     await page.goto('http://uitestingplayground.com/');
 

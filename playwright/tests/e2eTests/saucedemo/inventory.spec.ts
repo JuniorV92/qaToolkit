@@ -7,8 +7,8 @@ import * as products from "../../../utils/saucedemo/products";
 
 test("Verify inventory page UI", async ({ page }) => {
     await logIn.login(page, process.env.STANDAR_USER!, process.env.PASSWORD!);
-    expect(await page, "Incorrect URL for inventory page").toHaveURL(inventoryPage.SAUCEDEMO_INVENTORY_PAGE_URL);
-    inventoryPage.validatePageUI(page);
+    await expect(await page, "Incorrect URL for inventory page").toHaveURL(inventoryPage.SAUCEDEMO_INVENTORY_PAGE_URL);
+    await inventoryPage.validatePageUI(page);
     const items = await inventoryPage.getAllItems(page);
     await expect(await items.count()).toBeGreaterThanOrEqual(0);
     await expect(await page.locator(inventoryPage.SORT_DROPDOWN)).toBeVisible();
